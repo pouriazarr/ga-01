@@ -1,6 +1,6 @@
 name: 1 - hello - world
 
-on: push
+on: workflow_dispatch
 
 jobs:
     first-job:
@@ -19,7 +19,7 @@ jobs:
               run: echo "Hi to you"
 
             - name: I will fail
-              run: exit 1
+              run: exit 0
 
             - name: Say GoodBye
               run: echo "GoodBye"
