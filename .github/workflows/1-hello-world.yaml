@@ -1,27 +1,31 @@
-name: 1 - hello - world
+name: 2 - different inputs
 
-on: workflow_dispatch
+#on: workflow_dispatch
+
+on: 
+    push:
+        #schedule:
+            #- cron: "*/5 * * * *"
+    workflow_dispatch:
+        inputs:
+            MySQL:
+                required: false
+                type: boolean
+            PostgreSQL:
+                required: false
+                type: boolean
 
 jobs:
-    first-job:
+    fetch-data:
         runs-on: ubuntu-latest
         steps:
-            - name: Print hello
-              run: echo "Hello World"
+            - name: MySQL fetch
+              if: ${{ github.event.inputs.MySQL == 'true'}}
+              run: echo "I Will Retrieve Data from MySQL"
 
-            - name: Print Goodbye
-              run: echo "GoodBye"
-
-    second-job:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Print Hi to you
-              run: echo "Hi to you"
-
-            - name: I will fail
-              run: exit 0
-
-            - name: Say GoodBye
-              run: echo "GoodBye"
-
+            - name: PostgreSQL fetch
+              if: ${{ github.event.inputs.PostgreSQL == 'true'}}
+              run: echo "I Will Retrieve Data from PostgreSQL"
               
+            - name: Done
+              run: echo "You Did it"
