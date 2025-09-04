@@ -29,3 +29,10 @@ jobs:
               
             - name: Done
               run: echo "You Did it"
+
+            - name: Some Logs
+              run:
+                echo "The name of event is = ${{ github.event_name }}"
+                echo "Commit SHA is  = ${{ github.sha }}"
+                echo "Runner is = ${{ runner.os }}"
+
